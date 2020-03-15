@@ -1,0 +1,15 @@
+version: "3.1"
+services:
+  mongo:
+    image: mongo
+    container_name: ticketingmongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data_volume:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=ticketingmongodb
+#      - MONGO_INITDB_ROOT_USERNAME=test
+#      - MONGO_INITDB_ROOT_PASSWORD=admin
+volumes:
+  mongodb_data_volume:
