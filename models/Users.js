@@ -14,7 +14,8 @@ const Users = new mongoose.Schema({
     projectedRetirementIncome: {type:Number, default: 500000.00},
     currentNetworth: {type:Number, default: 60000.00},
     monthlyIncome: {type:Number, default: 10000.00},
-    monthlyExpense: {type:Number, default: 5000.00}
+    monthlyExpense: {type:Number, default: 5000.00},
+    firebaseId: {type: String}
 });
 
 module.exports = mongoose.model('Users', Users);
