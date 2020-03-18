@@ -1,11 +1,8 @@
-//import parser from 'body-parser';
-
 const express = require('express');
 const mongoose = require('mongoose');
-const Users = require('./models/Users');
 const config = require('./config.js');
+const helmet = require('helmet');
 
-console.log(config.mongoUrl)
 //Connect to localhost MongoDB using Mongoose ORM, 1 ARG: Database Address, 2 ARG: Callback func for confirmation of setup
 mongoose.connect(config.mongoUrl, { useNewUrlParser: true }) //returns a "promise", if success or error
     .then(data => {
@@ -21,20 +18,35 @@ const app = express();
 app.use(express.json());
 //Receive form data and properly parse it out
 app.use(express.urlencoded({ extended: false }));
-// app.use(parser.urlencoded({
-//     extended: false
-// }));
+//Helmet for security
+app.use(helmet());
+//Handling CORS
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*"),
+        res.header(
+            "Access-Control-Allow-Headers",
+            "Origin, X-Requested-Width, Content-Type, Accept, Authorization"
+        );
+    res.header(
+        "Access-Control-Allow-Methods",
+        "PATCH, POST, GET, PUT, DELETE, OPTIONS"
+    );
+    if (req.method === "OPTIONS") {
+        res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
+        return res.status(200).json({});
+    }
+    next();
+});
 
 //Tell Express to use that for the "RESTful" /users paths
 //Import Routes Creates in 'routes' folder
 const users = require('./routes/users');
 app.use('/users', users);
 
-
 app.get('/', (req, res, next) => {
    res.json({
        confirmation: 'success',
-       data: 'This is my Mongo Project!'
+       data: 'TicketChain backend is running'
    })
 });
 
