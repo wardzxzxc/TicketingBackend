@@ -1,5 +1,7 @@
 const User = require('../models/Users.js');
 const firebase = require('../firebase/firebase.js');
+const jwt = require('jsonwebtoken');
+const config = require('../config');
 
 module.exports.signUp = async (req, res, next) => {
     try {
@@ -33,3 +35,28 @@ module.exports.signUp = async (req, res, next) => {
         })
     }
 };
+
+module.exports.login = async (req, res, next) => {
+    try {
+        const firebaseRes = await firebase.auth().signInWithEmailAndPassword(
+            req.body.email, req.body.password
+        );
+        const firebaseId = firebaseRes.user.uid;
+        const payload = {
+            firebaseId
+        };
+        const token = jwt.sign(payload, config.jwtSecret, {
+            expiresIn: "12H"
+        });
+        return res.status(200).json({
+            message: "Login successful",
+            token: token
+        })
+    } catch (error) {
+        return res.status(500).json({
+            message: 'An error occurred',
+            error: error.message
+        })
+    }
+
+}

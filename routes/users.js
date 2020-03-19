@@ -8,5 +8,7 @@ const Users = require('../models/Users');
 
 //Sign Up
 router.post('/signup', auth.signUp);
+//Login
+router.post('/login', auth.login);
 
 module.exports = router;
