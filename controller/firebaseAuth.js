@@ -46,7 +46,10 @@ module.exports.login = async (req, res, next) => {
         if (user) {
             const payload = {
                 firebaseId,
-                role: user.role
+                role: user.role,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email
             };
             const token = jwt.sign(payload, config.jwtSecret, {
                 expiresIn: "12H"
