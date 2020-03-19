@@ -42,16 +42,25 @@ module.exports.login = async (req, res, next) => {
             req.body.email, req.body.password
         );
         const firebaseId = firebaseRes.user.uid;
-        const payload = {
-            firebaseId
-        };
-        const token = jwt.sign(payload, config.jwtSecret, {
-            expiresIn: "12H"
-        });
-        return res.status(200).json({
-            message: "Login successful",
-            token: token
-        })
+        const user = await User.findOne({"email": req.body.email}).exec();
+        if (user) {
+            const payload = {
+                firebaseId,
+                role: user.role
+            };
+            const token = jwt.sign(payload, config.jwtSecret, {
+                expiresIn: "12H"
+            });
+            return res.status(200).json({
+                message: "Login successful",
+                token: token
+            })
+        } else {
+            return res.status(404).json({
+                message: 'An error occurred',
+                error: 'User cannot be found'
+            })
+        }
     } catch (error) {
         return res.status(500).json({
             message: 'An error occurred',
