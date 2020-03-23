@@ -1,15 +1,16 @@
 //1. Import Express
 const express = require('express');
-const auth = require('../controller/firebaseAuth');
+const user = require('../controller/user');
 
 //2. Import Express Router
 const router = express.Router();
 const Users = require('../models/Users');
 
 //Sign Up
-router.post('/signup', auth.signUp);
+router.post('/signup', user.signUp);
 //Login
-router.post('/login', auth.login);
-//
+router.post('/login', user.login);
+//Get User (currently only by address)
+router.get('/', user.getUser);
 
 module.exports = router;
