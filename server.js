@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const config = require('./config.js');
 const helmet = require('helmet');
+const Web3 = require('web3');
+const web3 = new Web3(config.gethNetwork);
 
 //Connect to localhost MongoDB using Mongoose ORM, 1 ARG: Database Address, 2 ARG: Callback func for confirmation of setup
 mongoose.connect(config.mongoUrl, { useNewUrlParser: true }) //returns a "promise", if success or error
@@ -41,8 +43,9 @@ app.use((req, res, next) => {
 //Tell Express to use that for the "RESTful" /users paths
 //Import Routes Creates in 'routes' folder
 const users = require('./routes/users');
+const eventOrganiser = require('./routes/eventOrganiser');
 app.use('/users', users);
-
+app.use('/eventorganiser', eventOrganiser);
 app.get('/', (req, res, next) => {
    res.json({
        confirmation: 'success',
