@@ -4,7 +4,6 @@ const user = require('../controller/user');
 
 //2. Import Express Router
 const router = express.Router();
-const Users = require('../models/Users');
 
 //Sign Up
 router.post('/signup', user.signUp);
@@ -12,5 +11,7 @@ router.post('/signup', user.signUp);
 router.post('/login', user.login);
 //Get User (currently only by address)
 router.get('/', user.getUser);
+//Metamask auth
+router.post('/auth', user.auth);
 
 module.exports = router;
