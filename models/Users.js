@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const Users = new mongoose.Schema({
     firebaseId: {type: String, required: true},
     email: {type: String, required: true},
-    walletAddress: {type: String, unique: true},
+    publicAddress: {type: String, unique: true},
     nonce: {type: Number, default: Math.floor(Math.random() * 1000000)},
     role: {
         type: String,

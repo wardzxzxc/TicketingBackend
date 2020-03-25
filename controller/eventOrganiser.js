@@ -19,7 +19,6 @@ module.exports.createEventContract = async (req, res, next) => {
 };
 
 module.exports.getEventByName = async (req, res, next) => {
-    const eventName = req.params.eventName;
     try {
         const event = Event.findOne({name: req.params.eventName});
         if(event) {
