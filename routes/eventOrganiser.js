@@ -7,6 +7,8 @@ const router = express.Router();
 
 //Create event
 router.post('/createevent', eventOrganiser.createEventContract);
-//Get event
+//Get event by name
 router.get('/:eventName', eventOrganiser.getEventByName);
+//Get event by ownerAdddress
+router.get('/:ownerAddressw', eventOrganiser.getEventsByOwnerAddress);
 module.exports = router;

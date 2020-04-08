@@ -37,7 +37,23 @@ module.exports.getEventByName = async (req, res, next) => {
             error: error
         });
     }
-}
+};
+
+module.exports.getEventsByOwnerAddress = async(req, res, next) => {
+    try {
+        const events = Event.find({ownerAddress: req.params.ownerAddress});
+            return res.status(200).json({
+                message: "Event found successfully",
+                event: events
+            })
+    } catch(error) {
+        return res.status(500).json({
+            message: "An error occurred",
+            error: error
+        });
+    }
+
+};
 
 
 // const abi = JSON.parse(config.nftABI);
