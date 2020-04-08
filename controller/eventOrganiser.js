@@ -20,7 +20,7 @@ module.exports.createEventContract = async (req, res, next) => {
 
 module.exports.getEventByName = async (req, res, next) => {
     try {
-        const event = Event.findOne({name: req.params.eventName});
+        const event = await Event.findOne({name: req.params.eventName}).exec();
         if(event) {
             return res.status(200).json({
                 message: "Event found successfully",
@@ -37,7 +37,24 @@ module.exports.getEventByName = async (req, res, next) => {
             error: error
         });
     }
-}
+};
+
+module.exports.getEventsByOwnerAddress = async(req, res, next) => {
+    try {
+        const events = await Event.find({ownerAddress: req.params.ownerAddress}).exec();
+            return res.status(200).json({
+                message: "Event found successfully",
+                events: events
+            })
+    } catch(error) {
+        console.log(error)
+        return res.status(500).json({
+            message: "An error occurred",
+            error: error
+        });
+    }
+
+};
 
 
 // const abi = JSON.parse(config.nftABI);
