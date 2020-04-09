@@ -11,4 +11,7 @@ router.post('/createevent', eventOrganiser.createEventContract);
 router.get('/eventName/:eventName', eventOrganiser.getEventByName);
 //Get event by ownerAdddress
 router.get('/ownerAddress/:ownerAddress', eventOrganiser.getEventsByOwnerAddress);
+//Get event by event's address
+router.get('/address/:address', eventOrganiser.getEventsByAddress);
+
 module.exports = router;
