@@ -6,6 +6,6 @@ const ticket = require('../controller/ticket');
 const router = express.Router();
 
 //Create Ticket
-router.post('/createTicket', ticket.createTicket);
+router.post('/buyTicket', ticket.buyTicket);
 
 module.exports = router;

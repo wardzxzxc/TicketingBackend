@@ -1,13 +1,26 @@
 const Ticket = require('../models/Tickets');
 
 
-
-module.exports.createTicket = async (req, res, next) => {
+module.exports.buyTicket = async (req, res, next) => {
     try {
-        await Ticket.create(req.body);
-        return res.status(201).json({
-            message: "Ticket created successfully"
-        });
+        const ticketId = req.body.ticketId;
+        const ticket = await Ticket.findOne({
+            ticketId: ticketId
+        }).exec();
+        if (ticket) {
+            const newOwner = req.body.currentOwner;
+            await ticket.update({
+                currentOwner: newOwner
+            });
+            return res.status(201).json({
+                message: "Ticket successfully bought"
+            });
+        } else {
+            await Ticket.create(req.body);
+            return res.status(201).json({
+                message: "Ticket successfully bought"
+            });
+        }
     } catch (error) {
         return res.status(500).json({
             message: "An error occurred",
