@@ -7,7 +7,7 @@ const Events = new mongoose.Schema({
     imageUrl: {type: String, required: true},
     description: {type: String, required: true},
     ownerAddress: {type: String, required: true},
-
+    eventId: {type: String, required: true}
 });
 
 module.exports = mongoose.model('Events', Events);
