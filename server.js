@@ -43,10 +43,10 @@ app.use((req, res, next) => {
 //Import Routes Creates in 'routes' folder
 const users = require('./routes/users');
 const eventOrganiser = require('./routes/eventOrganiser');
-const listing = require('./routes/listing');
+const ticket = require('./routes/ticket');
 app.use('/users', users);
 app.use('/eventorganiser', eventOrganiser);
-app.use('/listing', listing);
+app.use('/ticket', ticket);
 app.get('/', (req, res, next) => {
    res.json({
        confirmation: 'success',

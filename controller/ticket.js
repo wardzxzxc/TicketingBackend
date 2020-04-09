@@ -1,13 +1,12 @@
-const config = require('../config.js');
-const Listing = require('../models/Listings');
-const Web3 = require('web3');
+const Ticket = require('../models/Tickets');
 
 
-module.exports.createListing = async (req, res, next) => {
+
+module.exports.createTicket = async (req, res, next) => {
     try {
-        await Listing.create(req.body);
+        await Ticket.create(req.body);
         return res.status(201).json({
-            message: "Listing created successfully"
+            message: "Ticket created successfully"
         });
     } catch (error) {
         return res.status(500).json({
