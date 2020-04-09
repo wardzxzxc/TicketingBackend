@@ -47,6 +47,7 @@ const ticket = require('./routes/ticket');
 app.use('/users', users);
 app.use('/eventorganiser', eventOrganiser);
 app.use('/ticket', ticket);
+
 app.get('/', (req, res, next) => {
    res.json({
        confirmation: 'success',
