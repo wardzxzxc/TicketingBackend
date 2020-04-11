@@ -11,9 +11,12 @@ router.post('/createevent', eventOrganiser.createEventContract);
 router.get('/eventName/:eventName', eventOrganiser.getEventByName);
 //Get event by ownerAdddress
 router.get('/ownerAddress/:ownerAddress', eventOrganiser.getEventsByOwnerAddress);
+//Update event by address
+router.put('/address/:address', eventOrganiser.updateEventByAddress);
 //Get event by event's address
 router.get('/address/:address', eventOrganiser.getEventsByAddress);
 //Get event by eventId
 router.get('/eventId/:eventId', eventOrganiser.getEventByEventId);
+
 
 module.exports = router;
