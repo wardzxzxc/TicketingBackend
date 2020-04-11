@@ -29,7 +29,7 @@ module.exports.buyTicket = async (req, res, next) => {
     }
 };
 
-module.exports.getTickets = async (req, res, next) => {
+module.exports.getTicketsByAddress = async (req, res, next) => {
     try {
         const tickets = await Ticket.find({currentOwner: req.params.address}).exec();
         return res.status(200).json({
@@ -44,4 +44,20 @@ module.exports.getTickets = async (req, res, next) => {
     }
 };
 
-
+module.exports.getTicketsByAddressAndEventId = async (req, res, next) => {
+    try {
+        const tickets = await Ticket.find({
+            currentOwner: req.params.address,
+            eventId: req.params.eventId
+        }).exec();
+        return res.status(200).json({
+            message: "Ticket(s) found successfully",
+            tickets: tickets
+        });
+    } catch (error) {
+        return res.status(500).json({
+            message: "An error occurred",
+            error: error
+        });
+    }
+}

@@ -8,7 +8,8 @@ const router = express.Router();
 
 //Create Ticket
 router.post('/buyTicket', ticket.buyTicket);
+//Get Tickets by eventId and
+router.get('/currentOwner/:address/eventId/:eventId', ticket.getTicketsByAddressAndEventId);
 //Get Tickets by Address
-router.get('/currentOwner/:address', ticket.getTickets);
-
+router.get('/currentOwner/:address', ticket.getTicketsByAddress);
 module.exports = router;
