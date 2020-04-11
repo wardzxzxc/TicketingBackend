@@ -78,6 +78,30 @@ module.exports.getEventsByAddress = async (req, res, next) => {
     }
 };
 
+module.exports.getEventByEventId = async (req, res, next) => {
+    try {
+        const event = await Event.findOne({eventId: req.params.eventId}).exec();
+        if (event === null) {
+            return res.status(404).json({
+                message: "Event could not be found",
+                event: event
+            })
+        } else {
+            return res.status(200).json({
+                message: "Event found successfully",
+                event: event
+            })
+        }
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            message: "An error occurred",
+            error: error
+        });
+    }
+
+}
+
 
 // const abi = JSON.parse(config.nftABI);
 // // Smart contract EVM bytecode as hex
