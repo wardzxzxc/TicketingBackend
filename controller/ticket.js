@@ -4,8 +4,10 @@ const Ticket = require('../models/Tickets');
 module.exports.buyTicket = async (req, res, next) => {
     try {
         const ticketId = req.body.ticketId;
+        const eventId = req.body.eventId;
         const ticket = await Ticket.findOne({
-            ticketId: ticketId
+            ticketId: ticketId,
+            eventId: eventId
         }).exec();
         if (ticket) {
             const newOwner = req.body.currentOwner;
