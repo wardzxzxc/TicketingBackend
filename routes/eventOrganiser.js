@@ -13,5 +13,7 @@ router.get('/eventName/:eventName', eventOrganiser.getEventByName);
 router.get('/ownerAddress/:ownerAddress', eventOrganiser.getEventsByOwnerAddress);
 //Get event by event's address
 router.get('/address/:address', eventOrganiser.getEventsByAddress);
+//Get event by eventId
+router.get('/eventId/:eventId', eventOrganiser.getEventByEventId);
 
 module.exports = router;
