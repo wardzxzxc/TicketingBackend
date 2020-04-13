@@ -41,18 +41,16 @@ app.use((req, res, next) => {
 
 //Tell Express to use that for the "RESTful" /users paths
 //Import Routes Creates in 'routes' folder
-const users = require('./routes/users');
 const eventOrganiser = require('./routes/eventOrganiser');
 const ticket = require('./routes/ticket');
-app.use('/users', users);
 app.use('/eventorganiser', eventOrganiser);
 app.use('/ticket', ticket);
 
 app.get('/', (req, res, next) => {
-   res.json({
-       confirmation: 'success',
-       data: 'TicketChain backend is running'
-   })
+    res.json({
+        confirmation: 'success',
+        data: 'TicketChain backend is running'
+    })
 });
 
 app.listen(process.env.PORT || 5000);
